@@ -1,40 +1,56 @@
-@import "ui-variables";
-@import "ui-mixins";
+atom-text-editor[mini] {
+    font-size: @ui-input-size;
+    line-height: @ui-line-height;
+    max-height: none;
+    padding-left: @ui-padding/3;
+    border-radius: @component-border-radius;
+    color: @text-color-highlight;
+    border: 1px solid transparent;
+    background-color: @input-background-color;
+    overflow: auto;
 
-.atom-text-editor[mini] {
-  color: @text-color-highlight;
-  background-color: @input-background-color;
-  border: 1px solid @input-border-color;
-  box-shadow:
-    inset 0 1px 1px rgba(0, 0, 0, .075);
-  border-radius: @component-border-radius;
-  padding-left: @component-padding/2;
+    &,
+    &.editor {
+        background-color: @input-background-color-focus !important;
+        border-radius: @component-border-radius !important;
 
-  .cursor { border-color: #fff; }
-  .selection .region { background-color: lighten(@input-background-color, 10%); }
+        .placeholder-text {
+            color: @text-color-subtle;
+        }
+
+        .selection .region {
+            background-color: @input-selection-color;
+        }
+
+        .cursor {
+            border-color: @base-accent-color !important;
+            border-width: 2px;
+        }
+    }
+
+    &.is-focused,
+    &.is-focused.editor {
+        .focus();
+        background-color: @input-background-color-focus;
+
+        .selection .region {
+            background-color: @input-selection-color-focus;
+        }
+    }
 }
 
-.atom-text-editor.atom-text-editor-colors.mini.is-focused {
-  background-color: darken(@input-background-color, 5%);
-  .selection .region { background-color: lighten(@input-background-color, 10%); }
+atom-text-editor .wrap-guide {
+  background-color: @base-accent-color-light !important;
 }
 
-// FIXME: these should go in syntax themes?
-atom-text-editor, atom-text-editor.editor {
-  .gutter.drop-shadow {
-    -webkit-box-shadow: -2px 0 10px 2px #222;
-  }
-}
-@-webkit-keyframes highlight {
-  from { background-color: rgba(100, 255, 100, 0.7); }
-  to { background-color: null; }
-}
-.atom-text-editor .highlighted.selection .region {
-  -webkit-animation-name: highlight;
-  -webkit-animation-duration: 1s;
-  -webkit-animation-iteration-count: 1;
-}
+.gutter-container {
+    border-left: 1px solid black;
 
-.atom-text-editor .wrap-guide {
-  background: fade(@background-color-wild,20%);
+    .gutter {
+        background-color: @level-3-color;
+
+        .cursor-line {
+            background-color: @base-accent-color-light !important;
+        }
+    }
 }
